@@ -83,6 +83,7 @@ plt.title("Extracted PCB via Mask")
 plt.axis("off")
 plt.show()
 
+
 # %%
 
 # Step 2: Yolo V11
