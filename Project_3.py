@@ -1,9 +1,10 @@
+
 # Imports
-# import os
 import cv2
 import numpy as np
 from ultralytics import YOLO
 from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
 
 
 
@@ -22,7 +23,7 @@ gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blurred_img = cv2.GaussianBlur(gray_img, (5, 5), 0)
 
 # edge detection
-img_edges = cv2.Canny(blurred_img, 30, 120)
+img_edges = cv2.Canny(blurred_img, 50, 150)
 
 kernel = np.ones((5, 5), np.uint8)
 edges_dilated = cv2.dilate(img_edges, kernel, iterations=1)
@@ -81,12 +82,33 @@ plt.imshow(extracted)
 plt.title("Extracted PCB via Mask")
 plt.axis("off")
 plt.show()
+
 # %%
 
-
-
 # Step 2: Yolo V11
+model = YOLO("yolo11n.pt")
 
-model = YOLO("yolov11n.pt")
+model.train(data=r"C:\Users\Aidan Miziolek\Documents\GitHub\AER850_Project3_AidanM\Project 3 Data\data\data\data.yaml" , epochs=30, imgsz = 800, batch = 1, name = 'model_project_3', workers=0, device=0) 
 
-model.train(data=r"C:\Users\Aidan Miziolek\Documents\GitHub\AER850_Project3_AidanM\Project 3 Data\data\data\data.yaml" , epochs=50, imgsz = 1200, batch = 10, name = 'model_project_3') 
+
+
+
+
+# %%
+
+# Step 3: model evaluation
+
+model.predict(source=r"C:\Users\Aidan Miziolek\Documents\GitHub\AER850_Project3_AidanM\Project 3 Data\data\data\evaluation", conf=0.25, save=True, project=r"C:\Users\Aidan Miziolek\Documents\GitHub\AER850_Project3_AidanM",
+             name="evaluation_results")
+
+
+
+
+# conf_matrix = mpimg.imread(r"/content/runs/detect/yolo_model_project_32")
+# plt.imshow(conf_matrix)
+
+
+
+
+
+
