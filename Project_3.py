@@ -89,7 +89,7 @@ plt.show()
 # Step 2: Yolo V11
 model = YOLO("yolo11n.pt")
 
-model.train(data=r"C:\Users\Aidan Miziolek\Documents\GitHub\AER850_Project3_AidanM\Project 3 Data\data\data\data.yaml" , epochs=50, imgsz = 900, batch = 4, name = 'model_project_3', workers=0, device=0) 
+model.train(data=r"C:\Users\Aidan Miziolek\Documents\GitHub\AER850_Project3_AidanM\Project 3 Data\data\data\data.yaml" , epochs=125, imgsz = 1200, batch = 2, name = 'model_project_3', workers=0, device=0) 
 
 
 
